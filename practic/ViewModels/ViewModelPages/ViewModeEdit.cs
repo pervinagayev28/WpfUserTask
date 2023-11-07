@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace practic.ViewModels.ViewModelPages
@@ -33,9 +34,12 @@ namespace practic.ViewModels.ViewModelPages
         }
         public void Editcomand(object? param)
         {
+
             Users[Index] = new();
             Users[Index]=user!;
-            File.WriteAllText("C:\\Users\\Agaye_jz58\\source\\repos\\practic\\practic\\Database\\Users.json", JsonSerializer.Serialize(Users, new JsonSerializerOptions() { WriteIndented = true }));
+            File.WriteAllText("..//..//..//Database\\Users.json", JsonSerializer.Serialize(Users, new JsonSerializerOptions() { WriteIndented = true }));
+            ((Page)param).NavigationService.GoBack();
+
 
         }
         public bool CanEditCommand(object? param)

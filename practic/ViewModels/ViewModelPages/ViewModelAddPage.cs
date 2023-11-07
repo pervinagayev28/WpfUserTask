@@ -35,7 +35,7 @@ namespace practic.ViewModels.ViewModelPages
         public void AddComand(object? param)
         {
             users.Add(user);
-            File.WriteAllText("C:\\Users\\Agaye_jz58\\source\\repos\\practic\\practic\\Database\\Users.json",JsonSerializer.Serialize(users,new JsonSerializerOptions() { WriteIndented=true}));
+            File.WriteAllText("..//..//..//Database\\Users.json", JsonSerializer.Serialize(users,new JsonSerializerOptions() { WriteIndented=true}));
             user = new();
             PropertyChanged?.Invoke(this,new PropertyChangedEventArgs(nameof(user)));
         }

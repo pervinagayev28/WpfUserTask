@@ -25,15 +25,29 @@ namespace practic.ViewModels.ViewModelPages
         public ICommand ?AddCommand { get; set; }
         public ICommand ? RemoveCommand { get; set; }
         public ICommand ? EditCommand { get; set; }
+        public ICommand ? GetAllCommand { get; set; }
         public ViewModelEntry()
         {
             user = new();
-            users = new(JsonSerializer.Deserialize<List<User>>(File.ReadAllText("C:\\Users\\Agaye_jz58\\source\\repos\\practic\\practic\\Database\\Users.json"))!);
+            users = new(JsonSerializer.Deserialize<List<User>>(File.ReadAllText("..//..//..//Database\\Users.json"))!);
 
+            GetAllCommand = new Command(GetAllCom,CanGetAll);
             RemoveCommand = new Command(Removecomand, CanremoveCommand);
             AddCommand = new Command(AddComand,CanAddCommand);
             EditCommand = new Command(Editcomand, CanEditCommand);
            
+        }
+
+        private bool CanGetAll(object? obj)
+        {
+            return users?.Count != 0;
+        }
+
+        private void GetAllCom(object? obj)
+        {
+            Page page =new ViewGetAll();
+            page.DataContext = new ViewModelGetAll(users);
+            ((Page)obj!).NavigationService.Navigate(page);  
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -57,7 +71,7 @@ namespace practic.ViewModels.ViewModelPages
         public void Removecomand(object? param)
         {
             users.RemoveAt((int)param);
-            File.WriteAllText("C:\\Users\\Agaye_jz58\\source\\repos\\practic\\practic\\Database\\Users.json", JsonSerializer.Serialize(users, new JsonSerializerOptions() { WriteIndented = true }));
+            File.WriteAllText("..//..//..//Database\\Users.json", JsonSerializer.Serialize(users, new JsonSerializerOptions() { WriteIndented = true }));
 
 
         }
